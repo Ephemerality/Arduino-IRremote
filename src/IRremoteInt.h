@@ -257,6 +257,9 @@ public:
     /*
      * All standard (decode address + command) protocol decoders
      */
+    bool decodeMoovair();
+    bool decodeCodeset8();
+    bool decodeCodeset21();
     bool decodeBoseWave();
     bool decodeDenon();
     bool decodeJVC();
@@ -446,6 +449,9 @@ public:
     /*
      * New send functions
      */
+    void sendMoovair(uint8_t aAddress, uint32_t aCommand);
+    void sendCodeset8(uint16_t aAddress, uint32_t aCommand);
+    void sendCodeset21(uint16_t aAddress, uint32_t aCommand);
     void sendBoseWave(uint8_t aCommand, uint_fast8_t aNumberOfRepeats = NO_REPEATS);
     void sendDenon(uint8_t aAddress, uint8_t aCommand, uint_fast8_t aNumberOfRepeats, bool aSendSharp = false);
     void sendDenonRaw(uint16_t aRawData, uint_fast8_t aNumberOfRepeats = 0)

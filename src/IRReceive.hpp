@@ -391,6 +391,27 @@ bool IRrecv::decode() {
     }
 #endif
 
+#if defined(DECODE_MOOVAIR)
+    IR_TRACE_PRINTLN("Attempting Moovair decode");
+    if (decodeMoovair()) {
+        return true;
+    }
+#endif
+
+#if defined(DECODE_CODESET8)
+    IR_TRACE_PRINTLN("Attempting Codeset8 decode");
+    if (decodeCodeset8()) {
+        return true;
+    }
+#endif
+
+#if defined(DECODE_CODESET21)
+    IR_TRACE_PRINTLN("Attempting Codeset21 decode");
+    if (decodeCodeset21()) {
+        return true;
+    }
+#endif
+
     /*
      * Return true here, to let the loop decide to call resume or to print raw data.
      */
@@ -939,6 +960,16 @@ void printActiveIRProtocols(Print *aSerial) {
 #if defined(NO_DECODER) // for sending raw only
     (void)aSerial; // to avoid compiler warnings
 #endif
+#if defined(DECODE_MOOVAIR)
+    aSerial->print(F("Moovair , "));
+#endif
+#if defined(DECODE_CODESET8)
+    aSerial->print(F("Codeset8 , "));
+#endif
+#if defined(DECODE_CODESET21)
+    aSerial->print(F("Codeset21 , "));
+#endif
+
 }
 
 /**
@@ -1437,6 +1468,15 @@ const __FlashStringHelper* getProtocolString(decode_type_t aProtocol) {
         break;
     case APPLE:
         return (F("Apple"));
+        break;
+    case MOOVAIR:
+        return (F("Moovair"));
+        break;
+    case CODESET8:
+        return (F("Codeset8"));
+        break;
+    case CODESET21:
+        return (F("Codeset21"));
         break;
 
 #if !defined(EXCLUDE_EXOTIC_PROTOCOLS)

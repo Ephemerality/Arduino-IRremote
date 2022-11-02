@@ -66,6 +66,9 @@ typedef enum {
     LEGO_PF,
     MAGIQUEST,
     WHYNTER,
+    MOOVAIR,
+    CODESET8,
+    CODESET21
 #endif
 } decode_type_t;
 

@@ -99,7 +99,8 @@
 || defined(DECODE_PANASONIC) || defined(DECODE_LG) || defined(DECODE_NEC) || defined(DECODE_SAMSUNG) \
 || defined(DECODE_SONY) || defined(DECODE_RC5) || defined(DECODE_RC6) \
 || defined(DECODE_DISTANCE) || defined(DECODE_HASH) || defined(DECODE_BOSEWAVE) \
-|| defined(DECODE_LEGO_PF) || defined(DECODE_WHYNTER)))
+|| defined(DECODE_LEGO_PF) || defined(DECODE_WHYNTER) \
+|| defined(DECODE_MOOVAIR) || defined(DECODE_CODESET8) || defined(DECODE_CODESET21)))
 /*
  * If no protocol is explicitly enabled, we enable all protocols
  */
@@ -113,6 +114,9 @@
 #define DECODE_SONY
 #define DECODE_RC5
 #define DECODE_RC6
+#define DECODE_MOOVAIR
+#define DECODE_CODESET8
+#define DECODE_CODESET21
 
 #    if !defined(EXCLUDE_EXOTIC_PROTOCOLS) // saves around 2000 bytes program memory
 #define DECODE_BOSEWAVE
@@ -350,6 +354,18 @@
 
 #include "ir_Dish.hpp" // contains only sendDISH(unsigned long data, int nbits)
 #endif // #if !defined(USE_IRREMOTE_HPP_AS_PLAIN_INCLUDE)
+
+#  if defined(DECODE_MOOVAIR)
+#include "ir_Moovair.hpp"
+#  endif
+#  if defined(DECODE_CODESET8)
+#include "ir_Codeset8.hpp"
+#include "ac_Codeset8.cpp"
+#  endif
+#  if defined(DECODE_CODESET21)
+#include "ir_Codeset21.hpp"
+#include "ac_Codeset21.cpp"
+#  endif
 
 /**
  * Macros for legacy compatibility
