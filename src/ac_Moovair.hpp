@@ -193,11 +193,11 @@ bool Moovair::sendCommandAndParameter(char aCommand, int aParameter) {
 }
 
 void Moovair::sendState() {
-    IR_INFO_PRINT(F("Send code=0x"));
-    IR_INFO_PRINT(CurrentState.raw, HEX);
-    IR_INFO_PRINT(F(" | 0b"));
-    IR_INFO_PRINT(MOOVAIR_ADDRESS_COMMAND, BIN);
-    IR_INFO_PRINTLN(CurrentState.raw, BIN);
+    IR_DEBUG_PRINT(F("Send code=0x"));
+    IR_DEBUG_PRINT(CurrentState.raw, HEX);
+    IR_DEBUG_PRINT(F(" | 0b"));
+    IR_DEBUG_PRINT(MOOVAIR_ADDRESS_COMMAND, BIN);
+    IR_DEBUG_PRINTLN(CurrentState.raw, BIN);
 
     IrSender.sendMoovair(MOOVAIR_ADDRESS_STATE, CurrentState.raw);
 }
@@ -214,10 +214,10 @@ void Moovair::sendFollowMe() {
     followMe.Unknown3 = 0x3F;
     followMe.SensorTemperature = 21;
 
-    IR_INFO_PRINT(F("Send code=0x"));
-    IR_INFO_PRINT(followMe.raw, HEX);
-    IR_INFO_PRINT(F(" | 0b"));
-    IR_INFO_PRINTLN(followMe.raw, BIN);
+    IR_DEBUG_PRINT(F("Send code=0x"));
+    IR_DEBUG_PRINT(followMe.raw, HEX);
+    IR_DEBUG_PRINT(F(" | 0b"));
+    IR_DEBUG_PRINTLN(followMe.raw, BIN);
 
     IrSender.sendMoovair(MOOVAIR_ADDRESS_FOLLOW, followMe.raw);
 }
